@@ -9,8 +9,7 @@
     "lint": "gulp tslint",
     "serve": "gulp serve",
     "start": "gulp serve",
-    "debug": "gulp serve:debug",
-    "postinstall": "typings install"
+    "debug": "gulp serve:debug"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
