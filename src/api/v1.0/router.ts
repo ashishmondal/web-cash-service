@@ -124,21 +124,21 @@ router.get('/me', (req: FuncApp.IAppRequest, res) => {
 
 router.get('/accounts', (req: FuncApp.IAppRequest, res) => {
 	const dataService = new DataService(app.locals.config);
-	dataService.getAccount()
+	dataService.getAccounts()
 		.subscribe(account => {
 			FuncApp.sendDataJSON(200, 200, 'OK', '', [account], res);
 		},
 		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
 });
 
-router.get('/accounts/info/:id', (req: FuncApp.IAppRequest, res) => {
-	const dataService = new DataService(app.locals.config);
-	dataService.getSubAccounts(req.params.id)
-		.subscribe(accounts => {
-			FuncApp.sendDataJSON(200, 200, 'OK', '', accounts, res);
-		},
-		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
-});
+// router.get('/accounts/info/:id', (req: FuncApp.IAppRequest, res) => {
+// 	const dataService = new DataService(app.locals.config);
+// 	dataService.getSubAccounts(req.params.id)
+// 		.subscribe(accounts => {
+// 			FuncApp.sendDataJSON(200, 200, 'OK', '', accounts, res);
+// 		},
+// 		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
+// });
 
 router.get('/accounts/summary', (req: FuncApp.IAppRequest, res) => {
 	const dataService = new DataService(app.locals.config);
@@ -167,11 +167,29 @@ router.get('/commodities', (req: FuncApp.IAppRequest, res) => {
 		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
 });
 
+router.get('/book', (req: FuncApp.IAppRequest, res) => {
+	const dataService = new DataService(app.locals.config);
+	dataService.getBook()
+		.subscribe(books => {
+			FuncApp.sendDataJSON(200, 200, 'OK', '', books, res);
+		},
+		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
+});
+
+router.get('/splits/:accountId', (req: FuncApp.IAppRequest, res) => {
+	const dataService = new DataService(app.locals.config);
+	dataService.getSplits(req.params.accountId)
+		.subscribe(splits => {
+			FuncApp.sendDataJSON(200, 200, 'OK', '', [splits], res);
+		},
+		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
+});
+
 router.get('/transactions/:accountId', (req: FuncApp.IAppRequest, res) => {
 	const dataService = new DataService(app.locals.config);
 	dataService.getTransactions(req.params.accountId)
-		.subscribe(commodities => {
-			FuncApp.sendDataJSON(200, 200, 'OK', '', [commodities], res);
+		.subscribe(transactions => {
+			FuncApp.sendDataJSON(200, 200, 'OK', '', [transactions], res);
 		},
 		error => FuncApp.sendErrorJSON(502, 502, 'ERROR', '', [error], res));
 });
